@@ -75,3 +75,58 @@ begin
 end
 
 exec spAddTwoNumbers 20, 30
+
+--Create a procedure that will count the total number of employees in the Employee table using the output parameter.
+create procedure spGetTotalCount
+	@TotalCount int output
+as 
+begin
+	select @TotalCount = Count(ID) from Employee
+end
+
+declare @EmployeeCount int
+execute spGetTotalCount @EmployeeCount output
+print @EmployeeCount
+
+
+--Create a procedure that will count the total number of employees in the Employee table using return status.
+create procedure spGetTotalCount1
+as
+begin
+	return (select count(ID) from Employee)
+end
+
+declare @EmployeeCount1 int
+execute @EmployeeCount1 = spGetTotalCount1
+print @EmployeeCount1
+
+--Create a procedure that will take the id value of an employee and return the name of that employee using the output parameter.
+create Procedure spGetEmployeeNameByID 
+	@ID int,
+	@Name varchar(40) output
+as 
+begin
+	select @Name = Name From Employee 
+	where ID = @ID
+end
+
+declare @EmployeeName varchar(40)
+execute spGetEmployeeNameByID 3, @EmployeeName output
+print @EmployeeName
+
+--Create a procedure that will take the id value of an employee and return the name of that employee using the Status value
+create procedure spGetEmployeeByID
+	@ID int
+as
+begin
+	return(select Name from Employee where ID = @ID)
+end
+
+declare @EmployeeName varchar(30)
+execute @EmployeeName = spGetEmployeeByID
+print @EmployeeName
+
+
+sp_help Employee
+Select * from syscomments
+
