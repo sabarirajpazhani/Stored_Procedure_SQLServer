@@ -38,3 +38,17 @@ end
 exec spGetEmployee
 
 sp_helptext spGetEmployee
+
+--How to change the body of the Procedure
+alter procedure spGetEmployee
+as
+begin
+	select Name,Gender, DOB from Employee
+end
+
+exec spGetEmployee
+
+--How to change the Procedure Name
+exec sp_rename 'spGetEmployee' , 'spGetEmployee1'
+
+exec spGetEmployee1
