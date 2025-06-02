@@ -52,3 +52,26 @@ exec spGetEmployee
 exec sp_rename 'spGetEmployee' , 'spGetEmployee1'
 
 exec spGetEmployee1
+
+
+
+--Adding Two variable
+create procedure spAddTwoNumbers
+	@no1 int,
+	@no2 int
+as 
+begin
+	declare @Result int
+	set @Result = @no1 + @no2
+	print 'Result is '+cast(@Result as varchar)
+end
+
+alter procedure spAddTwoNumbers (@no1 int, @no2 int)
+as
+begin
+	declare @Result int
+	set @Result = @no1 + @no2
+	print 'Result is '+ cast(@Result as varchar)
+end
+
+exec spAddTwoNumbers 20, 30
